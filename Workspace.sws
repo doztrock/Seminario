@@ -4,7 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{305DF5CB-B0F4-4D65-8C19-7E3AB4C0EB3E}" Name="SCSIPS" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="SCSIPS.pdm"/>
+		<Model Expanded="Yes" ID="{77DFFF12-F520-4B96-A729-05264DE3F081}" Name="SCSIPS" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="SCSIPS.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
