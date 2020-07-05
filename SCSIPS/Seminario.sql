@@ -52,13 +52,21 @@ end;
 
 /
 CREATE TABLE "proyecto" (
-	"identificador" VARCHAR2(11) NOT NULL,
+	"identificador" NUMBER(11) NOT NULL,
 	"identificador_tipo_proyecto" NUMBER(11) NOT NULL,
 	"identificador_cliente" NUMBER(11) NOT NULL,
 	"nombre" VARCHAR2(50) NOT NULL,
 	"prefijo" VARCHAR2(10) UNIQUE NOT NULL,
 	constraint PROYECTO_PK PRIMARY KEY ("identificador"));
 
+CREATE sequence "PROYECTO_IDENTIFICADOR_SEQ";
+
+CREATE trigger "BI_PROYECTO_IDENTIFICADOR"
+  before insert on "proyecto"
+  for each row
+begin
+  select "PROYECTO_IDENTIFICADOR_SEQ".nextval into :NEW."identificador" from dual;
+end;
 
 /
 CREATE TABLE "rol" (
@@ -77,12 +85,20 @@ end;
 
 /
 CREATE TABLE "usuario_proyecto" (
-	"identificador" VARCHAR2(11) NOT NULL,
+	"identificador" NUMBER(11) NOT NULL,
 	"identificador_usuario" NUMBER(11) NOT NULL,
 	"identificador_proyecto" NUMBER(11) NOT NULL,
 	"identificador_rol" NUMBER(11) NOT NULL,
 	constraint USUARIO_PROYECTO_PK PRIMARY KEY ("identificador"));
 
+CREATE sequence "USUARIO_PROYECTO_IDENTIFICADOR_SEQ";
+
+CREATE trigger "BI_USUARIO_PROYECTO_IDENTIFICADOR"
+  before insert on "usuario_proyecto"
+  for each row
+begin
+  select "USUARIO_PROYECTO_IDENTIFICADOR_SEQ".nextval into :NEW."identificador" from dual;
+end;
 
 /
 CREATE TABLE "tipo_proyecto" (
@@ -104,6 +120,10 @@ CREATE TABLE "incidente" (
 	"identificador" NUMBER(11) NOT NULL,
 	"identificador_tipo_incidente" NUMBER(11) NOT NULL,
 	"identificador_estado_incidente" NUMBER(11) NOT NULL,
+	"identificador_proyecto" NUMBER(11) NOT NULL,
+	"identificador_usuario" NUMBER(11) NOT NULL,
+	"titulo" VARCHAR2(100) NOT NULL,
+	"descripcion" VARCHAR2(1000) NOT NULL,
 	constraint INCIDENTE_PK PRIMARY KEY ("identificador"));
 
 CREATE sequence "INCIDENTE_IDENTIFICADOR_SEQ";
@@ -180,6 +200,8 @@ ALTER TABLE "usuario_proyecto" ADD CONSTRAINT "usuario_proyecto_fk2" FOREIGN KEY
 
 ALTER TABLE "incidente" ADD CONSTRAINT "incidente_fk0" FOREIGN KEY ("identificador_tipo_incidente") REFERENCES "tipo_incidente"("identificador");
 ALTER TABLE "incidente" ADD CONSTRAINT "incidente_fk1" FOREIGN KEY ("identificador_estado_incidente") REFERENCES "estado_incidente"("identificador");
+ALTER TABLE "incidente" ADD CONSTRAINT "incidente_fk2" FOREIGN KEY ("identificador_proyecto") REFERENCES "proyecto"("identificador");
+ALTER TABLE "incidente" ADD CONSTRAINT "incidente_fk3" FOREIGN KEY ("identificador_usuario") REFERENCES "usuario"("identificador");
 
 
 
