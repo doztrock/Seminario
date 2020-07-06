@@ -23,7 +23,8 @@ FROM
     PAGO P 
 INNER JOIN 
     ENTIDAD_BANCARIA EB
-  USING(coentban)
+  ON
+    P.coentban = EB.coentban
 WHERE
     TRUNC(P.FECHAPAG) >= TO_DATE('01-01-2020', 'dd-mm-yyyy')
   AND
