@@ -1,0 +1,10 @@
+/*
+    Ejercicio 6.
+*/
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE; 
+
+CREATE TABLE persona AS (SELECT * FROM COLEGIO.persona);
+CREATE TABLE profesor AS (SELECT * FROM COLEGIO.profesor);
+CREATE TABLE cargo AS (SELECT * FROM COLEGIO.cargo);
+CREATE TABLE estudiante AS (SELECT * FROM COLEGIO.estudiante);
+CREATE TABLE colegio AS (SELECT * FROM COLEGIO.colegio);
