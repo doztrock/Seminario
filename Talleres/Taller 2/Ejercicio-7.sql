@@ -49,9 +49,3 @@ RIGHT JOIN
     b.cocolegio = c.cocolegio
 WHERE
     b.cocolegio IS NULL;
-
-
-
-
-
-
