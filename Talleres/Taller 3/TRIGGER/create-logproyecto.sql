@@ -1,7 +1,6 @@
-/* creación de un archivo log para los Proyectos*/
-
-create table logproyecto(
-fecha varchar2(50),
-accion char(1),
-usuario varchar2(50)
+/* creaciï¿½n de un archivo log para los Proyectos*/
+CREATE TABLE logproyecto (
+    fecha     VARCHAR2(50),
+    accion    CHAR(1),
+    usuario   VARCHAR2(50)
 );

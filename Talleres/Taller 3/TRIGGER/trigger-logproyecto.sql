@@ -1,19 +1,20 @@
-CREATE OR REPLACE TRIGGER LOGPROYECTO AFTER INSERT OR DELETE OR UPDATE ON PROYECTO
-declare
+CREATE OR REPLACE TRIGGER logproyecto AFTER
+    INSERT OR DELETE OR UPDATE ON proyecto
+DECLARE
+    tipoaccion CHAR(1);
+BEGIN
+    IF inserting THEN
+        tipoaccion := 'I';
+    ELSIF updating THEN
+        tipoaccion := 'U';
+    ELSE
+        tipoaccion := 'D';
+    END IF;
 
-tipoaccion char(1);
+    INSERT INTO logproyecto VALUES (
+        to_char(sysdate, 'month dd, yyyy hh24 : mi : ss'),
+        tipoaccion,
+        user
+    );
 
-begin
-
-if inserting then
-   tipoaccion :='I';
-   elsif updating then
-         tipoaccion :='U';
-         else
-         tipoaccion :='D';
-end if;
-
-insert into logproyecto
-values(to_char(sysdate,'month dd, yyyy hh24 : mi : ss'),tipoaccion,user);
-
-end;
+END;
